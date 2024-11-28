@@ -1,0 +1,2 @@
+npm install  
+cloudinary express-fileupload node-cron nodemailer validator

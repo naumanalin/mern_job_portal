@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test API</title>
+</head>
+<body>
+  <h1>Test Register API</h1>
+  <form id="registerForm" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" required><br><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+      <option value="Job Seeker">Job Seeker</option>
+      <option value="Employer">Employer</option>
+    </select><br><br>
+
+    <label for="firstNiche">First Niche:</label>
+    <input type="text" id="firstNiche" name="firstNiche"><br><br>
+
+    <label for="secondNiche">Second Niche:</label>
+    <input type="text" id="secondNiche" name="secondNiche"><br><br>
+
+    <label for="thirdNiche">Third Niche:</label>
+    <input type="text" id="thirdNiche" name="thirdNiche"><br><br>
+
+    <label for="coverLetter">Cover Letter:</label>
+    <textarea id="coverLetter" name="coverLetter"></textarea><br><br>
+
+    <label for="resume">Resume:</label>
+    <input type="file" id="resume" name="resume" required><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Prepare the form data
+      const formData = new FormData();
+      formData.append('name', document.getElementById('name').value);
+      formData.append('email', document.getElementById('email').value);
+      formData.append('phone', document.getElementById('phone').value);
+      formData.append('address', document.getElementById('address').value);
+      formData.append('password', document.getElementById('password').value);
+      formData.append('role', document.getElementById('role').value);
+      formData.append('firstNiche', document.getElementById('firstNiche').value);
+      formData.append('secondNiche', document.getElementById('secondNiche').value);
+      formData.append('thirdNiche', document.getElementById('thirdNiche').value);
+      formData.append('coverLetter', document.getElementById('coverLetter').value);
+      formData.append('resume', document.getElementById('resume').files[0]);
+
+      try {
+        const response = await fetch('http://localhost:8000/api/v1/user/register', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        // Show the response
+        document.getElementById('response').textContent = JSON.stringify(result, null, 2);
+      } catch (error) {
+        document.getElementById('response').textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>

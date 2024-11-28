@@ -1,0 +1,33 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment variables file
+.env
+
+# Build output
+/dist
+/build
+
+# Dependency directories for specific tools
+/.pnp
+.pnp.js
+
+# NPM package lock files (optional, can be useful for consistency)
+package-lock.json
+
+# IDE/Editor settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Other files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
